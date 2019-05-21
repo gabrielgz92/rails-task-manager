@@ -1,0 +1,35 @@
+<div class="container"></div>
+  <h1>Tasks</h1>
+  <ul class="list-group">
+    <% @tasks.each do |task| %>
+    <li class="list-group-item">
+      <%= task["id"] %>.
+      <strong> <%= task["title"] %> </strong>.
+      Completed: <%= task["completed"] %>.
+      <%= link_to "See task!", task_path(task["id"]) %>
+      <%= link_to "Edit", edit_task_path(task["id"]) %>
+      <%= link_to "Delete", task_path(task),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </li>
+  </ul>
+</<div>
+
+<br>
+
+<!-- Default unchecked -->
+<% @tasks.each do |task| %>
+  <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id=<%= task.id %>>
+      <label class="custom-control-label" for=<%= task.id %>>
+       <%= task["id"] %>
+       <%= task["title"] %>
+       </label>
+  </div>
+<% end %>
+
+<br>
+
+<%= link_to "Add new task", tasks_new_path, class:"btn btn-primary" %>
+
